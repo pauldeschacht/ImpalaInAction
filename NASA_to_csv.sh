@@ -1,11 +1,11 @@
 #
 # get the NASA logs
 #
-wget -X GET -O NASA.gz ftp://ita.ee.lbl.gov/traces/NASA_access_log_Jul95.gz
+wget -X GET -O NASA.csv.gz ftp://ita.ee.lbl.gov/traces/NASA_access_log_Jul95.gz
 #
 # create tab-separated csv file. Note \t is tab character, for OSX systems, use CTRL+V TAB to insert tab in command
 #
-cat NASA_access_log_Jul95 | sed "s/ - - \[/\t/g" | sed "s/\] \"/\t/g" | sed "s/\" /\t/g" | sed "s/\([0-9]*\) \([0-9]*\)$/ \1\t\2 /g" > NASA.csv
+zcat NASA.csv | sed "s/ - - \[/\t/g" | sed "s/\] \"/\t/g" | sed "s/\" /\t/g" | sed "s/\([0-9]*\) \([0-9]*\)$/ \1\t\2 /g" > NASA.csv
 #
 # get the geoip information for each NASA weblog. Prerequisite: freegeoip, open source tool on 
 #
