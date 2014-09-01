@@ -1,4 +1,13 @@
 #!/bin/bash
+
+get_country {
+  host=$1
+  last=`awk -F'.' '{print $NF}'`
+  case $last in
+    be) "BELGIUM"
+    *) "Not Found"
+}
+
 while IFS=$'\t' read host date req response size
 do
 #  domain=`nslookup $host | tail -n 2 | grep Address | sed "s/Address: //g"`
