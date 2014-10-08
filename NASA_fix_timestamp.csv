@@ -7,7 +7,7 @@ function to_timestamp(s) {
   hh = substr(s,13,2)
   mm = substr(s,16,2)
   ss = substr(s,19,2)
-  return "" day "-" month "-" year " " hh ":" mm ":" ss
+  return "" year "-" month "-" day " " hh ":" mm ":" ss
 }
 
 {print $1"\t"to_timestamp($2)"\t"$3"\t"$4"\t"$5"\t"$6}'

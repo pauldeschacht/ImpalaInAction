@@ -6,7 +6,7 @@ wget -X GET -O NASA_access_log_Jul95.gz ftp://ita.ee.lbl.gov/traces/NASA_access_
 #
 # create tab-separated csv file. 
 #
-zcat NASA_access_log_Jul95.gz | sed "s/ - - \[/${SEP}/g" | sed "s/\] \"/${SEP}/g" | sed "s/\" /${SEP}/g" | sed "s/\([0-9]*\) \([0-9]*\)$/ \1${SEP}\2 /g" > NASA_raw.csv
+zcat NASA_access_log_Jul95.gz | sed "s/ - - \[/${SEP}/g" | sed "s/\] \"/${SEP}/g" | sed "s/\" /${SEP}/g" | sed "s/\([0-9]*\) \([0-9]*\)$/ \1${SEP}\2 /g" | sed "s/ -$/${SEP}/g" > NASA_raw.csv
 #
 # get the geoip information for each NASA weblog. Prerequisite: freegeoip, open source tool on https://freegeoip.net/
 #
@@ -21,5 +21,7 @@ grep -v "Not Found" geoip_raw.csv | cut -f 6-7 | sort | uniq > countries.csv
 grep -v "Not Found" geoip_raw.csv | cut -f 1-6 > geoip.csv 
 #
 # convert timestamps to Impala timestamp format
-./NASA_fix_timestamp NASA_raw.csv > NASA.csv
+./NASA_fix_timestamp NASA_raw.csv > NASA_tmp.csv
 #
+# fix trailing column
+./NASA_fix_column NASA_tmp.csv > NASA.csv
