@@ -48,6 +48,10 @@ get_country() {
   esac
 }
 
+
+#
+# REQUIREMENT: freegeoip is running locally on port 8080 
+#
 while IFS=$'\t' read host date req response size
 do
 # host host ip city_name lon lat country_code country_name
