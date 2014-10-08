@@ -20,8 +20,11 @@ grep -v "Not Found" geoip_raw.csv | cut -f 6-7 | sort | uniq > countries.csv
 #
 grep -v "Not Found" geoip_raw.csv | cut -f 1-6 > geoip.csv 
 #
-# convert timestamps to Impala timestamp format
-./NASA_fix_timestamp NASA_raw.csv > NASA_tmp.csv
+# convert NASA timestamps to Impala timestamp format
+./NASA_fix_timestamp.sh NASA_raw.csv > NASA_tmp.csv
 #
-# fix trailing column
-./NASA_fix_column NASA_tmp.csv > NASA.csv
+# post fix trailing column
+./NASA_fix_column.sh NASA_tmp.csv > weblog.csv
+
+# compress
+gzip weblog.csv
