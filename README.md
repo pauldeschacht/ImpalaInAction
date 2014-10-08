@@ -21,3 +21,5 @@ An external service is called that translates the domain names into geoip inform
 The countries are extracted from the output of the geoip service and saved in a separate file.
 
 Finally, the date information in the NASA weblog file is converted to Impala's timestamp format by the script `NASA_fix_timestamp.sh` and a post fix is applied that fixes a trailing column `NASA_fix_columns.sh`.
+
+For the exercise, not all the geoip lines are imported in Impala (this is to avoid having 2 tables with similar size).
